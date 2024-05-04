@@ -65,11 +65,7 @@ When ('informar um novo e-mail', function(){
 });
 
 When ('informar um email já cadastrado', function(){   
-   
-   // cy.get('@emailAs').then(function(email){          
-   //    cy.get(paginaUsuario.inputBuscaUsuario).type(email)
-   // });
-   
+      
    cy.get('@emailAs').then(function(email){
       paginaCadastro.typeEmail(email)
    });   
