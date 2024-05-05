@@ -12,7 +12,9 @@ export default class UsuarioPage{
     listaUsuarios = '#listaUsuarios > #userData';
     
     labelEmail = '[data-test="userDataEmail"]';
-    labelNome = '[data-test="userDataName"]';
+    labelNome = 'p[data-test="userDataName"]';
+
+    
     
     
     
