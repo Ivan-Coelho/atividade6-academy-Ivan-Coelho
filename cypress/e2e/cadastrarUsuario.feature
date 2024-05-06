@@ -4,11 +4,11 @@ Funcionalidade: Cadastro de Usuários
 
 @delUser
 Cenario: Cadastro de usuários com sucesso fornecendo 4 caracteres para o campo nome
-Dado que acessei a pagina de cadastro de usuários
-Quando informar um nome "Ivan"
-E informar um novo e-mail
-E salvar a operação
-Então retornará a mensagem "Usuário salvo com sucesso"
+    Dado que acessei a pagina de cadastro de usuários
+    Quando informar um nome "Ivan"
+    E informar um novo e-mail
+    E salvar a operação
+    Então retornará a mensagem "Usuário salvo com sucesso"
 
 @delUser
 Cenário: Cadastro de usuário com sucesso fornecendo 100 caracteres para o campo nome
@@ -47,6 +47,20 @@ Cenário: Não deve ser possível cadastrar usuário informando menos de 4 carac
     E informar um novo e-mail
     E salvar a operação
     Então retornará a mensagem "Informe pelo menos 4 letras para o nome."
+
+Cenário: Não deve ser possível cadastrar usuário informando um nome em branco
+    Dado que acessei a pagina de cadastro de usuários
+    Quando informar um nome "       "
+    E informar um novo e-mail    
+    E salvar a operação
+    Então retornará a mensagem "Não foi possível cadastrar o usuário!"
+
+Cenário: Não deve ser possível cadastrar usuário com campo email em branco
+    Dado que acessei a pagina de cadastro de usuários
+    Quando informar um novo nome
+    E informar um e-mail "              "  
+    E salvar a operação
+    Então retornará a mensagem "O campo e-mail é obrigatório"
 
 Cenário: Não deve ser possível cadastrar usuário informando mais de 100 caracteres para o campo nome
     Dado que acessei a pagina de cadastro de usuários

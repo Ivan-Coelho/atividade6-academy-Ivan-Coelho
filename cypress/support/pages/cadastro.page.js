@@ -10,7 +10,7 @@ export default class CadastroPage {
     //buttonCancelarErro = 'sc-jxOSlX.bjFExy'
 
     
-       typeNome(nome){
+    typeNome(nome){
         cy.get(this.inputNome).type(nome);
     }
     

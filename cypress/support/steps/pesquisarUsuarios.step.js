@@ -9,28 +9,28 @@ const paginaCadastro = new CadastroPage();
 const paginaUsuario = new UsuarioPage();
 const paginaDetalhes = new DetalhesPage();
 
-beforeEach(function(){
-let usuario = {
-    name: faker.person.firstName(),
-    email: faker.internet.email().toLowerCase()
-}
-cy.intercept('POST', 'https://rarocrud-80bf38b38f1f.herokuapp.com/api/v1/users').as('esperar')
-cy.visit('')
-cy.get(paginaUsuario.linkNovoUsuario).click();
-paginaCadastro.cadastrar(usuario.name + ' Coelho', usuario.email)
-cy.wait('@esperar')
-cy.wrap(usuario).as('user')
+// beforeEach(function(){
+// let usuario = {
+//     name: faker.person.firstName(),
+//     email: faker.internet.email().toLowerCase()
+// }
+// cy.intercept('POST', 'https://rarocrud-80bf38b38f1f.herokuapp.com/api/v1/users').as('esperar')
+// cy.visit('')
+// cy.get(paginaUsuario.linkNovoUsuario).click();
+// paginaCadastro.cadastrar(usuario.name + ' Coelho', usuario.email)
+// cy.wait('@esperar')
+// cy.wrap(usuario).as('user')
 
-})
+// })
 
-afterEach(function(){
+// afterEach(function(){
 
-    cy.visit('')   
-    cy.get('@user').then(function(usuario){          
-       cy.get(paginaUsuario.inputBuscaUsuario).clear().type(usuario.email)
-    });
-    cy.deletarUsuario();
-});
+//     cy.visit('')   
+//     cy.get('@user').then(function(usuario){          
+//        cy.get(paginaUsuario.inputBuscaUsuario).clear().type(usuario.email)
+//     });
+//     cy.deletarUsuario();
+// });
 
 Given('que acessei a pagina dos usuários', function(){
     cy.visit('')

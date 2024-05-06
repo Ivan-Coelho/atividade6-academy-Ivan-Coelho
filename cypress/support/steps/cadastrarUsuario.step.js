@@ -12,7 +12,7 @@ const paginaUsuario = new UsuarioPage();
 After({ tags: '@delUser'}, function(){
    cy.visit('')   
    cy.get('@emailAs').then(function(email){          
-      cy.get(paginaUsuario.inputBuscaUsuario).type(email)
+      cy.get(paginaUsuario.inputBuscaUsuario).clear().type(email)
    });
    cy.deletarUsuario();
 })
@@ -21,10 +21,12 @@ Before({ tags: '@CadastrarUser'}, function(){
       nome: faker.person.firstName(),
       email: faker.internet.email()
    } 
+   cy.intercept('POST', 'https://rarocrud-80bf38b38f1f.herokuapp.com/api/v1/users').as('esperar')  
    cy.visit('');
    cy.get(paginaUsuario.linkNovoUsuario).click();
-   paginaCadastro.cadastrar(usuario.nome, usuario.email)
-   cy.contains('Usuário salvo com sucesso').should('exist').and('be.visible');
+   paginaCadastro.cadastrar(usuario.nome + 'Coelho', usuario.email)
+   cy.wait('@esperar')
+   //cy.contains('Usuário salvo com sucesso').should('exist').and('be.visible');
    
    cy.wrap(usuario.email).as('emailAs')
    
@@ -42,9 +44,9 @@ When ('informar um nome {string}', function(nome){
 });
 
 When ('informar um novo nome', function(){
-   let nome = faker.person.fullName();
+   let nome = faker.person.firstName();
    
-   paginaCadastro.typeNome(nome);
+   paginaCadastro.typeNome(nome + 'Coelho');
 
 });
 
@@ -83,5 +85,5 @@ Then('retornará a mensagem {string}', function(mensagem){
 
 });
 
-//Then('Então deve aparecer a mensagem {O campo nome é obrigatório')
+
 
