@@ -124,6 +124,14 @@ When('informar um novo nome e um novo email', function () {
     }).as('user')
 })
 
+When('informar um novo nome e email', function () {
+    let novoNome = faker.person.firstName();
+    let novoEmail = faker.internet.email().toLowerCase();
+
+    cy.get(paginaDetalhes.labelNome).clear().type(novoNome + ' Barbalho')
+    cy.get(paginaDetalhes.labelEmail).clear().type(novoEmail);    
+})
+
 When('informar o nome {string}', function (nome) {
 
     cy.get(paginaDetalhes.labelNome).clear().type(nome);
@@ -148,6 +156,11 @@ When('informar um e-mail já cadastrado', function () {
 
 When('salvar a atualização', function () {
     paginaDetalhes.clickButtonSalvar();
+    
+})
+
+When('cancelar a atualização', function () {
+    paginaDetalhes.clickButtonCancelar();
     
 })
 
@@ -189,4 +202,23 @@ Then('os dados do usuário devem ter sido atualizado', function () {
         })
 
     })
+});
+
+Then('os dados do usuário não devem ter sido alterados', function(){
+
+    cy.get('@idUsuario').then(function (id) {
+        cy.visit('https://rarocrud-frontend-88984f6e4454.herokuapp.com/users/' + id)
+    })
+
+    cy.get('@user').then(function (usuario) {
+        cy.get('@idUsuario').then(function (id) {
+
+            cy.get(paginaDetalhes.labelId).should('exist').and('be.visible').and('have.value', id);
+            cy.get(paginaDetalhes.labelNome).should('exist').and('be.visible').and('have.value', usuario.nome);
+            cy.get(paginaDetalhes.labelEmail).should('exist').and('be.visible').and('have.value', usuario.email);
+
+        })
+
+    })
+
 });

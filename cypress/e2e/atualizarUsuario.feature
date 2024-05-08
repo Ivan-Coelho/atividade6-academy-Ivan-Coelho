@@ -5,7 +5,7 @@ Funcionalidade: Atualizar dados de usuário
 
 Contexto: Usuário deve acessar o sistema
     Dado que acessei em detalhes os dados do usuário
-    Quando acessa a funcionalidade editar 
+    Quando acessa a funcionalidade editar     
 
 Cenário: Atualizar com sucesso o nome de um usuário já cadastrado
     E informar um novo nome para o usuario
@@ -25,57 +25,72 @@ Cenário: Atualizar com sucesso os dados de um usuário já cadastrado
     Então deve aparecer a mensagem "Informações atualizadas com sucesso!"
     E os dados do usuário devem ter sido atualizado
 
+    Cenário: Cancelar a atualização não deve alterar os dados do usuário
+    E informar um novo nome e email
+    E cancelar a atualização
+    Então os dados do usuário não devem ter sido alterados
+
 Cenário: Não deve ser possível atualizar o nome de um usuário para um nome em branco
     E informar o nome "       "
     E salvar a atualização
     Então deve aparecer a mensagem "As informações não foram atualizadas."
+    E os dados do usuário não devem ter sido alterados
 
 Cenário: Não deve ser possível atualizar o email de um usuário para um email em branco
     E informar o email "              "
     E salvar a atualização
     Então deve aparecer a mensagem "Formato de e-mail inválido"
+    E os dados do usuário não devem ter sido alterados
 
 Cenário: Não deve ser possível atualizar o nome de um usuário para um nome com números
     E informar o nome "Ian7"
     E salvar a atualização
     Então deve aparecer a mensagem "Formato do nome é inválido."
+    E os dados do usuário não devem ter sido alterados
 
 Cenário: Não deve ser possível atualizar o nome de um usuário para um nome com menos de 4 caracteres
     E informar o nome "Ian"
     E salvar a atualização
     Então deve aparecer a mensagem "Informe pelo menos 4 letras para o nome."
+    E os dados do usuário não devem ter sido alterados
 
 Cenário: Não deve ser possível atualizar o nome de um usuário para um nome com caracteres especiais
     E informar o nome "Ian'"
     E salvar a atualização
     Então deve aparecer a mensagem "Formato do nome é inválido."
+    E os dados do usuário não devem ter sido alterados
 
 Cenário: Não deve ser possível atualizar o email de um usuário para um email com caracteres especiais
     E informar o email "asdsa@jhgkmw.com'alert"
     E salvar a atualização
     Então deve aparecer a mensagem "Formato de e-mail inválido"
+    E os dados do usuário não devem ter sido alterados
 
 Cenário: Não deve ser possível atualizar o nome de um usuário para um nome com mais de 100 caracteres
     E informar o nome "Pedro De Alcântara João Carlos Leopoldo S. B. F. X. D Paula L. M. G. R. Gonzaga De Bragança E Bourbon"
     E salvar a atualização
-    Então deve aparecer a mensagem "Informe no máximo 100 caracteres para o nome"    
+    Então deve aparecer a mensagem "Informe no máximo 100 caracteres para o nome"
+    E os dados do usuário não devem ter sido alterados    
 
 Cenário: Não deve ser possível atualizar o email de um usuário para um email com mais de 60 caracteres
     E informar o email "precisodeumemailenormedegrandeparatestaressetrem1@raro.com.br"
     E salvar a atualização
-    Então deve aparecer a mensagem "Informe no máximo 60 caracteres para o e-mail" 
+    Então deve aparecer a mensagem "Informe no máximo 60 caracteres para o e-mail"
+    E os dados do usuário não devem ter sido alterados 
 
 @emailJaCadastrado @delUsersCadastrado
 Cenário: Não deve ser possível atualizar o email de um usuário para um email já cadastrado
     E informar um e-mail já cadastrado
     E salvar a atualização
     Então deve aparecer a mensagem "Este e-mail já é utilizado por outro usuário."
+    E os dados do usuário não devem ter sido alterados
    
 
 Esquema do Cenário: Não deve ser possível atualizar o email de um usuário para um email em formato invalido
     E informar o email "<email>"
     E salvar a atualização
-    Então deve aparecer a mensagem "Formato de e-mail inválido" 
+    Então deve aparecer a mensagem "Formato de e-mail inválido"
+    E os dados do usuário não devem ter sido alterados 
     Exemplos:
     |    email    |
     | ivan2qa.com |

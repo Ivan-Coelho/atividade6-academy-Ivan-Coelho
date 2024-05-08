@@ -21,7 +21,7 @@ Given('que acessei a pagina de usuários listados', function () {
 
 Given('a lista de usuários está vazia', function () {
 
-    cy.intercept('GET', 'https://rarocrud-80bf38b38f1f.herokuapp.com/api/v1/users', {
+    cy.intercept('GET', '/api/v1/users', {
         statusCode: 200,
         body: []
     }).as('listaVazia')

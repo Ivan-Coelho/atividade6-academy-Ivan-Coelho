@@ -12,7 +12,7 @@ export default class UsuarioPage{
     paginaAtual = "#paginacaoAtual";
 
     
-    listaUsuarios = '#listaUsuarios > #userData';
+    listaUsuarios = '#listaUsuarios > #userData';    
     
     labelEmail = '[data-test="userDataEmail"]';
     labelNome = 'p[data-test="userDataName"]';
