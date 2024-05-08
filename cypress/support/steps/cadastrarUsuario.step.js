@@ -26,8 +26,7 @@ Before({ tags: '@CadastrarUser'}, function(){
    cy.get(paginaUsuario.linkNovoUsuario).click();
    paginaCadastro.cadastrar(usuario.nome + 'Coelho', usuario.email)
    cy.wait('@esperar')
-   //cy.contains('Usuário salvo com sucesso').should('exist').and('be.visible');
-   
+      
    cy.wrap(usuario.email).as('emailAs')
    
 })
@@ -84,6 +83,3 @@ Then('retornará a mensagem {string}', function(mensagem){
    cy.contains(mensagem).should('exist').and('be.visible');
 
 });
-
-
-

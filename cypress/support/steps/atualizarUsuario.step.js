@@ -11,20 +11,20 @@ const paginaUsuario = new UsuarioPage();
 const paginaDetalhes = new Detalhespage();
 
 Before({ tags: '@emailJaCadastrado' }, function () {
-let usuario2 = {
-    nome: faker.person.firstName() + ' Almeida',
-    email: faker.internet.email().toLowerCase()
- } 
- cy.intercept('POST', 'https://rarocrud-80bf38b38f1f.herokuapp.com/api/v1/users').as('esperar')  
- cy.visit('');
- cy.get(paginaUsuario.linkNovoUsuario).click();
- paginaCadastro.cadastrar(usuario2.nome, usuario2.email)
- cy.wait('@esperar')
-      
- cy.wrap(usuario2.email).as('emailCadastrado')
+    let usuario2 = {
+        nome: faker.person.firstName() + ' Almeida',
+        email: faker.internet.email().toLowerCase()
+    }
+    cy.intercept('POST', 'https://rarocrud-80bf38b38f1f.herokuapp.com/api/v1/users').as('esperar')
+    cy.visit('');
+    cy.get(paginaUsuario.linkNovoUsuario).click();
+    paginaCadastro.cadastrar(usuario2.nome, usuario2.email)
+    cy.wait('@esperar')
+
+    cy.wrap(usuario2.email).as('emailCadastrado')
 });
 
-Before({ tags: '@CadastrarUsers' }, function () {
+Before({ tags: '@CadastrarUsers'}, function () {
     let usuario = {
         nome: faker.person.firstName() + " Coelho",
         email: faker.internet.email().toLowerCase()
@@ -43,7 +43,7 @@ After({ tags: '@delUsers' }, function () {
     cy.get('@user').then(function (usuario) {
         cy.get(paginaUsuario.inputBuscaUsuario).clear().type(usuario.email)
     });
-    
+
     cy.deletarUsuario();
 });
 
@@ -52,7 +52,7 @@ After({ tags: '@delUsersCadastrado' }, function () {
     cy.get('@emailCadastrado').then(function (email) {
         cy.get(paginaUsuario.inputBuscaUsuario).clear().type(email)
     });
-    
+
     cy.deletarUsuario();
 });
 
@@ -83,23 +83,20 @@ Given('que acessei em detalhes os dados do usuário', function () {
 
 });
 
-
-When('clica no botão editar', function () {
+When('acessa a funcionalidade editar', function () {
 
     paginaDetalhes.clickButtonEditar();
 });
 
-When('informar um novo nome2', function () {
+When('informar um novo nome para o usuario', function () {
 
     let name = faker.person.firstName();
     cy.get(paginaDetalhes.labelNome).clear().type(name + ' Barbalho')
 
     cy.wrap(name + ' Barbalho').as('nome')
-
-
 })
 
-When('informar um novo email2', function () {
+When('informar um novo email para o usuario', function () {
 
     let novoEmail = faker.internet.email().toLowerCase();
     cy.get(paginaDetalhes.labelEmail).clear().type(novoEmail);
@@ -121,44 +118,37 @@ When('informar um novo nome e um novo email', function () {
 
     cy.get(paginaDetalhes.labelNome).clear().type(novoNome + ' Barbalho')
     cy.get(paginaDetalhes.labelEmail).clear().type(novoEmail);
-
-    //cy.get('@user').then(function () {
-
-        cy.wrap({
-            nome: novoNome + " Barbalho",
-            email: novoEmail
-        }).as('user')
-
-    //})
-
+    cy.wrap({
+        nome: novoNome + " Barbalho",
+        email: novoEmail
+    }).as('user')
 })
 
-When('informar o nome {string}', function(nome){
+When('informar o nome {string}', function (nome) {
 
     cy.get(paginaDetalhes.labelNome).clear().type(nome);
 
 });
 
-When('informar o email {string}', function(email){
+When('informar o email {string}', function (email) {
 
     cy.get(paginaDetalhes.labelEmail).clear().type(email);
 
 });
 
-When('informar um e-mail já cadastrado', function(){
-    
-    cy.get('@emailCadastrado').then(function(email){
+When('informar um e-mail já cadastrado', function () {
+
+    cy.get('@emailCadastrado').then(function (email) {
 
         cy.get(paginaDetalhes.labelEmail).clear().type(email);
 
     })
-    
 
 });
 
 When('salvar a atualização', function () {
     paginaDetalhes.clickButtonSalvar();
-    //cy.wait(1000)
+    
 })
 
 Then('deve aparecer a mensagem {string}', function (mensagem) {

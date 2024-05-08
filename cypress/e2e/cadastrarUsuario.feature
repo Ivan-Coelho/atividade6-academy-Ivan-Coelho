@@ -26,8 +26,6 @@ Cenário: Cadastro de usuário com sucesso fornecendo 60 caracteres para o campo
     E salvar a operação
     Então retornará a mensagem "Usuário salvo com sucesso"
 
-# Funcionalidade: Falha no cadastro de usuários ao fornecer dados inválidos
-
 Cenário: Não deve ser possível cadastrar usuário sem preencher o campo nome
     Dado que acessei a pagina de cadastro de usuários
     Quando informar um novo e-mail   

@@ -1,5 +1,6 @@
 #language: pt
 
+@criarUsuario @deletarUsuario
 Funcionalidade: Pesquisar usuário
 
 Cenário: Pesquisa de usuários pelo nome

@@ -4,21 +4,32 @@ export default class UsuarioPage{
     linkCadastroUsuario = '[href="/users/novo"]'; //quando página está vazia
     inputBuscaUsuario = '.sc-gsFSXq.mUpIH';    
     
-    buttonDelete = '.sc-fUnMCh.dttKkA';
+    buttonDelete = '[data-test="userDataDelete"]'
+    //buttonDelete = '.sc-fUnMCh.dttKkA';
+    buttonDetalhes = '#userDataDetalhe'
     buttonProxima = '#paginacaoProximo';
     buttonAnterior = '#paginacaoVoltar';
-    paginaAtual = "#paginacaoAtual";    
+    paginaAtual = "#paginacaoAtual";
+
     
     listaUsuarios = '#listaUsuarios > #userData';
     
     labelEmail = '[data-test="userDataEmail"]';
     labelNome = 'p[data-test="userDataName"]';
 
-    
-    
-    
-    
+    headerUsuarioNaoCadastro = 'h3';
+
     getListaUsuarios() {
-        return cy.get(this.listaUsuarios); }
-    
+        return cy.get(this.listaUsuarios); 
     }
+    
+    clickProximaPagina(){
+        cy.get(this.buttonProxima).click()
+    }
+
+    clickPaginaAnterior() {
+        cy.get(this.buttonAnterior).click();
+    }
+
+
+}
